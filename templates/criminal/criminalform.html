@@ -1,0 +1,81 @@
+{% extends 'base.html' %} {% block breadcrumb %} Crime Info {% endblock %}
+{%block content %}
+
+<!-- Breadcrumb -->
+
+<div class="">
+  <h1 class="h3 p-4">Criminal Info</h1>
+</div>
+<br />
+
+<form method="POST"  action="{% url 'criminaladd' %}" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="text-right">
+    {% if not crime %}
+    <button class="btn btn-sm btn-primary" type="submit">SAVE</button>
+    {% endif %}
+  </div>
+  <hr class="hr" />
+
+  <div class="form-row">
+    <div class="col-md-6 mb-3">
+      <div class="input-group input-group-outline mb-3">
+        <label class="form-label">Name:</label>
+        <input type="text" class="form-control" name="name" required />
+      </div>
+    </div>
+    <div class="col-md-6 mb-3">
+      <div class="input-group input-group-outline mb-3">
+        <label class="form-label">NIN:</label>
+        <input type="text" class="form-control" name="nin" required />
+      </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-md-6 mb-3">
+      <div class="input-group input-group-outline mb-3">
+        <select
+          class="form-control"
+          aria-label="Default select example"
+          name="crimeopt"
+        >
+          <option selected disabled>Select Crime</option>
+          {% if crimeoption %} {% for value in crimeoption %}
+          <option value={{value.id}}>{{value.title}}</option>
+          {% endfor %} {% endif %}
+        </select>
+      </div>
+    </div>
+    <div class="col-md-6 mb-3">
+      <div class="input-group input-group-outline mb-3"></div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Charge(s)</label>
+    <div class="input-group input-group-outline mb-3">
+      <!-- <label class="form-label">Charge(s)</label> -->
+      <textarea class="form-control" name="charges" row="20" required>
+      </textarea>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <form method="POST" name="inputForm" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div id="camera" class="camera">
+       
+        <input
+          id="webimg"
+          name="src"
+          type="file"
+        />
+      </div>
+     </div>
+     
+
+    </form>
+    {% include "partials/_alerts.html" %}
+  </div>
+</form>
+{% endblock %}

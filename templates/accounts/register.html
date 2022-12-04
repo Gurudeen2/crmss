@@ -1,0 +1,137 @@
+{% extends 'accounts/base.html' %} {% block title %} Registration Page |
+{%endblock %} {% block account %}
+<section id="login">
+  <div class="container" id="loginpanel">
+    <div
+      style="
+        background-color: #fff;
+        width: 100%;
+        color: #000;
+        text-align: center;
+        padding: 0.4rem;
+      "
+    >
+      <h3>Registration</h3>
+    </div>
+    <br />
+    <!-- Alerts -->
+    {% include 'partials/_alerts.html' %}
+    <form method="POST" action="{% url 'register' %}">
+      {% csrf_token %}
+      <!-- SenderEmail Address -->
+
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label"
+          >First Name</label
+        >
+        <input
+          type="text"
+          maxlength="30"
+          name="fname"
+          class="form-control"
+          id="exampleFormControlInput1"
+          placeholder=""
+          required
+        />
+      </div>
+
+      <!-- SenderEmail Address -->
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label"
+          >Middle Name</label
+        >
+        <input
+          type="text"
+          maxlength="30"
+          name="mname"
+          class="form-control"
+          id="exampleFormControlInput1"
+          placeholder=""
+          required
+        />
+      </div>
+      <!-- SenderEmail Address -->
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label"
+          >Last Name</label
+        >
+        <input
+          type="text"
+          name="lname"
+          class="form-control"
+          id="exampleFormControlInput1"
+          placeholder=""
+          required
+        />
+      </div>
+      <!-- SenderEmail Address -->
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label"
+          >Username</label
+        >
+        <input
+          type="text"
+          name="username"
+          class="form-control"
+          id="exampleFormControlInput1"
+          placeholder=""
+          required
+        />
+        <div class="valid-feedback">Username Already exist</div>
+      </div>
+      <!-- SenderEmail Address -->
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">E-mail</label>
+        <input
+          type="email"
+          name="uemail"
+          class="form-control"
+          id="exampleFormControlInput1"
+          placeholder=""
+          required
+        />
+      </div>
+      <!-- Sender Email Password -->
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label"
+          >Confirm Password</label
+        >
+        <input
+          type="password"
+          name="conpasswrd"
+          required
+          class="form-control"
+          id="exampleFormControlInput1"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">
+          Password</label
+        >
+        <input
+          type="password"
+          name="passwrd"
+          required
+          class="form-control"
+          id="exampleFormControlInput1"
+        />
+      </div>
+
+      <!-- <Alert>{{error}}</Alert> -->
+      <!-- <div class="col text-right"> -->
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col text-right">
+            <input type="submit" value="Sign in" class="btn-lg btn-success" />
+          </div>
+        </div>
+      </div>
+    </form>
+    <!-- blue: #007bff;
+    --indigo: #6610f2;
+    --purple: #6f42c1; -->
+  </div>
+</section>
+
+{% endblock %}

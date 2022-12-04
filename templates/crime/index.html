@@ -1,0 +1,113 @@
+{% extends 'base.html' %} {% block breadcrumb %}Crime Report{% endblock %}
+{%block content %}
+<section id="details" class="py-3">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="h3 p-4">Crime Report</h2>
+    </div>
+  </div>
+</section>
+
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+    <form class="form-inline" action="{% url 'crime' %}" method="post">
+     {% csrf_token %}
+      <div class="mx-sm-4 mb-2 input-group input-group-outline">
+        <label for="search" class="sr-only">Search</label>
+        <input
+          type="text"
+          class="form-control"
+          id="search"
+          name="search"
+          value="{{searchparam}}"
+          placeholder="Search"
+        />
+      </div>
+
+      <button type="submit" class="btn btn-primary mb-2">Search</button>
+    </form>
+  </div>
+</div>
+
+<div class="" style="overflow-x: scroll">
+  <table class="table table-striped justify-content-center">
+    <thead class="bg-primary text-white">
+      <tr>
+        <th scope="col">#</th>
+        <th>Title</th>
+        <th>Ref No</th>
+        <th>Section</th>
+        <th>Sub-Section</th>
+        <th>Act</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody class="tb" >
+      
+      {% if crimes %} {% for crime in crimes %}
+      <tr {% if con %} hidden{% endif %}>
+        <th scope="row">{{crime}}</td>
+        <td>{{crime.title}}</td>
+        <td>{{crime.refno}}</td>
+        <td>{{crime.section}}</td>
+        <td>{{crime.subsection}}</td>
+        <td>{{crime.acts}}</td>
+        <td class="text-right text-white">
+          <form method="get" action="{% url 'delete' %}">
+          <a
+            class="btn btn-sm btn-primary"
+            name="view"
+            href="{% url 'view' crime.id %}"
+            
+          >View</a>
+            <input type="text" hidden name="del" value="{{crime.id}}">
+          <input type="submit"
+            class="btn btn-sm btn-danger"
+            
+          value="Delete"/>
+          </form>
+        </td>
+      </tr>
+      {% endfor %} {% endif %}
+      <tr>
+
+        {% if con %}
+        <td>
+
+        record not found
+        </td>
+        {% endif %}
+      </tr>
+    </tbody>
+  </table>
+</div>
+<br />
+
+
+
+
+<nav aria-label="">
+  <ul class="pagination justify-content-end">
+    <li class="page-item ">
+      {% if crimes.has_previous %}
+      <a class="page-link" href="?page={{ crimes.previous_page_number }}" tabindex="-1">Previous</a>
+      {% endif %}
+    </li>
+{% if pagecount%}
+{% for count in pagecount %}
+    <li {% if count == crimes.number %}
+    class="page-item active"
+    {% endif %}><a class="page-link" href="?page={{ count }}" >{{count}}</a></li>
+{% endfor %}
+{% endif %}
+   <li class="page-item">
+        {% if crimes.has_next %}
+      <a class="page-link" href="?page={{ crimes.next_page_number }}">Next</a>
+      {% endif %}
+    </li>
+  </ul>
+</nav>
+
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'accounts/base.html' %} {% block title %} Login | {% endblock %} 
+{%block account %}
+<section id="login">
+  <div class="container" id="loginpanel" style="margin-top: 7rem">
+    <div
+      style="
+        background-color: #fff;
+        width: 100%;
+        color: #000;
+        text-align: center;
+        padding: 0.4rem;
+      "
+    >
+      <h3>SIGN IN</h3>
+    </div>
+    {% include "partials/_alerts.html" %}
+    <br />
+    <form method="POST" action="{% url 'login' %}">
+      {% csrf_token %}
+      <!-- SenderEmail Address -->
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label"
+          >Username</label
+        >
+        <input
+          type="text"
+          name="username"
+          class="form-control"
+          id="exampleFormControlInput1"
+          placeholder=""
+        />
+      </div>
+
+      <!-- Sender Email Password -->
+      <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">
+          Password</label
+        >
+        <input
+          type="password"
+          name="passwrd"
+          class="form-control"
+          id="exampleFormControlInput1"
+        />
+        <a href="" class="text-danger"> Forget Password</a>
+      </div>
+
+      <!-- <div class="col text-right"> -->
+      <input
+        type="submit"
+        value="Login"
+        class="btn btn-success"
+        style="width: 100%"
+      />
+    </form>
+    <!-- blue: #007bff;
+    --indigo: #6610f2;
+    --purple: #6f42c1; -->
+  </div>
+</section>
+
+{% endblock %}
